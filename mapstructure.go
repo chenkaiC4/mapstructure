@@ -336,7 +336,7 @@ func (d *Decoder) decodeString(name string, data interface{}, val reflect.Value)
 		} else {
 			val.SetString("0")
 		}
-	case dataKind == reflect.Int && d.config.WeaklyTypedInput:
+	case (dataKind >= reflect.Int || dataKind <= reflect.Int64) && d.config.WeaklyTypedInput:
 		val.SetString(strconv.FormatInt(dataVal.Int(), 10))
 	case dataKind == reflect.Uint && d.config.WeaklyTypedInput:
 		val.SetString(strconv.FormatUint(dataVal.Uint(), 10))
